@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login =()=>{
-    const navigate = useNavigate();
+    
     const paperStyle={
         padding: 20,
         height: '70vh',
@@ -21,24 +21,23 @@ const Login =()=>{
         margin: '8px 0'
     }
 
+    const navigate = useNavigate();
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
-    const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated")|| false));
+    const [authenticated, setauthenticated] = useState(
+        localStorage.getItem(localStorage.getItem("authenticated") || false)
+    );
+    
     const users = [{ username: "admin", password: "123" }];
     const handleSubmit = (e) => {
-        e.preventDefault()
-        const account = users.find((user) => user.username === username);
+    e.preventDefault();
+    const account = users.find((user) => user.username === username);
         if (account && account.password === password) {
-            setauthenticated(true);
             localStorage.setItem("authenticated", true);
+            setauthenticated(true);
             if(authenticated){
                 navigate("/dashboard");
-            }else{
-                navigate("/");
             }
-            
-        }else{
-            navigate("/");
         }
     };
 
@@ -51,7 +50,7 @@ const Login =()=>{
                 </Avatar>
                 <h4>Sign In</h4>
                 <form onSubmit={handleSubmit} >
-                    <TextField id="username" label="UserName" placeholder="Enter Username" variant="outlined" 
+                    <TextField style={loginbtn} id="username" label="UserName" placeholder="Enter Username" variant="outlined" 
                     fullWidth required value={username} onChange={e=>setusername(e.target.value)}  />
                     
                     <TextField type="password" id="password" label="Password" placeholder="Enter Password" variant="outlined" 
