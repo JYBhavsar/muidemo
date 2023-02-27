@@ -1,25 +1,18 @@
-import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import React from "react";
+import { Container, Typography } from '@mui/material';
+
 
 const Dashboard = () => {
-    const [authenticated, setauthenticated] = useState(null);
-    useEffect(() => {
-    const loggedInUser = localStorage.getItem("authenticated");
-        if (loggedInUser) {
-            setauthenticated(loggedInUser);
-        }
-    }, []);
 
-    if (!authenticated) {
-        // Redirect
-        <Navigate to='/' />
-    } else {
-        return (
-            <div>
-                <p>Welcome to your Dashboard</p>
-            </div>
-        );
-    }
+    return (
+        <>
+            <Container maxWidth="xl">
+                <Typography variant="h4" sx={{ mb: 5 }}>
+                    Hi, Welcome To Dashboard
+                </Typography>
+            </Container>
+        </>
+    );
 };
 
 export default Dashboard;

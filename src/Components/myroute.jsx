@@ -1,15 +1,25 @@
-import React from "react";
+import * as React from 'react';
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
-import Login from "./login";
-import Dashboard from "./dashboard";
 
+const Login = React.lazy(() => import('./login'))
+const Dashboard = React.lazy(() => import('./dashboard'))
 const Myroute =()=>{
 
     return(
         <Router>
             <Routes>
-                <Route path="/" element={<Login/>}></Route>
-                <Route path="/dashboard" element={<Dashboard/>}></Route>
+                <Route path="/" element={
+                                        <React.Suspense fallback={<>Loading....</>}>
+                                            <Login/>
+                                        </React.Suspense>
+                                        }>
+                </Route>
+                <Route path="/dashboard" element={
+                                        <React.Suspense fallback={<>Loading....</>}>
+                                            <Dashboard/>
+                                        </React.Suspense>
+                                        }>
+                </Route>
             </Routes>
         </Router>
     )
