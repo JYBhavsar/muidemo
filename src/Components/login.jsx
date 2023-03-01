@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const Login =()=>{
     
+    const navigate = useNavigate();
+
     const paperStyle={
         padding: 20,
         height: '70vh',
@@ -21,7 +23,6 @@ const Login =()=>{
         margin: '8px 0'
     }
 
-    const navigate = useNavigate();
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
     const [authenticated, setauthenticated] = useState(
@@ -41,7 +42,8 @@ const Login =()=>{
         }
     };
 
-    return (
+   return (
+        <>
         <Grid>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center'>
@@ -70,7 +72,8 @@ const Login =()=>{
                 </Grid>
             </Paper>
         </Grid>
-   
+        
+        </>
     )
 }
 
