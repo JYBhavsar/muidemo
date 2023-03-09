@@ -4,25 +4,23 @@ import LoginSharpIcon from '@mui/icons-material/LoginSharp';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login =()=>{
+
+const Login =(props)=>{
     
     const navigate = useNavigate();
-
     const paperStyle={
         padding: 20,
         height: '70vh',
         width: 280,
         margin: '20px auto'
     }
-    
     const avatarStyle={
         backgroundColor:'green' 
     }
-
     const loginbtn={
         margin: '8px 0'
     }
-
+    localStorage.setItem("enabled",false);
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
     const [authenticated, setauthenticated] = useState(
@@ -34,12 +32,20 @@ const Login =()=>{
     e.preventDefault();
     const account = users.find((user) => user.username === username);
         if (account && account.password === password) {
-            localStorage.setItem("authenticated", true);
             setauthenticated(true);
             if(authenticated){
+                props.showAlert("Logged In Successfully","success");
+                localStorage.setItem("authenticated", true);
+                localStorage.setItem("token","2010961130");
                 navigate("/dashboard");
             }
+        }else{
+            props.showAlert("Invalid Credentials","error")
         }
+    };
+
+    const handleForgetClick =()=>{
+        props.showAlert("Page is not available.","warning");
     };
 
    return (
@@ -66,8 +72,8 @@ const Login =()=>{
                     <Button type="submit" style={loginbtn} color="primary" variant="outlined" fullWidth>Login</Button>    
                 </form>
                     <Typography>
-                        <Link href="#">Forget Password ?</Link>
-                        <Link href="#">Sign up ?</Link>
+                        <Link href="/" onClick={handleForgetClick} >Forget Password ?</Link>
+                        <Link href="/" onClick={handleForgetClick}>Sign up ?</Link>
                     </Typography>
                 </Grid>
             </Paper>
